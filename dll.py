@@ -54,6 +54,7 @@ class DoubleLinkedList:
             self.tail = new_node
         self.length += 1
 
+    # 6. Remover nodo al inicio de la lista
     def shift_node(self):
         if self.length == 0:
             self.head = None
@@ -65,6 +66,7 @@ class DoubleLinkedList:
             self.length -= 1
             return print(remove_node.value)
 
+    # 7. Remover nodo al final de la lista
     def pop_node(self):
         if self.length == 0:
             self.head = 0
@@ -76,3 +78,52 @@ class DoubleLinkedList:
             remove_node.previous = None
             self.length -= 1
             return print(remove_node.value)
+
+    # 8. Remover nodo en una posicion dada de la lista
+    def remove_node(self, index):
+        if self.length > 0 and index < self.length:
+            if index == 0:
+                self.shift_node()
+            elif index == self.length - 1:
+                self.pop_node()
+            else:
+                remove_node = self.get_node(index)
+                previous_node = self.get_node(index -1)
+                previous_node.next = remove_node.next
+                remove_node.next = None
+                remove_node = self.tail
+                self.tail = remove_node.previous
+                self.tail.next = None
+                remove_node.previous = None
+                self.length -= 1
+                return print(remove_node.value)
+        else:
+            print('Index fuera de rango')
+
+    # 9. Método que retorna el nodo en la posición indicada de la lista
+    def get_node(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == self.length - 1:
+            return self.tail
+        
+        current_node = self.head
+        counter = 0
+        while index != counter:
+            current_node = current_node.next
+            counter += 1
+        return current_node
+
+    # Método que retorna el valor del nodo en la posición indicada de la lista
+    def get_node_value(self, index):
+        node = self.get_node(index)
+        if node != None: return node.value
+        else: print('Index fuera de rango')
+
+    # Método que settea el valor del nodo en la posición indicada de la lista
+    def set_node_value(self, index, value):
+        search_node = self.get_node(index)
+        if search_node != None:
+            search_node.value = value
+        else:
+            print('Index fuera de rango') 
