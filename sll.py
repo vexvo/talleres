@@ -131,3 +131,16 @@ class SingleLinkedList:
         for i in range(0, self.length - 1):
             self.insert(i, self.tail.value)
             self.pop()
+
+    ''' Método que invierte la lista y a la vez le saca raiz cuadrada al valor del nodo'''
+    def sqr_reverse(self):
+        if self.len <= 1:
+            current_node = self.head
+            if current_node != None:
+                current_node.data = round(current_node.data ** (1/2), 2)
+            return
+        for i in range(self.len):
+            current_node = self.head
+            current_node.data = round(current_node.data ** (1/2), 2)
+            self.insert_node(self.len-i, current_node.data)
+            self.remove_head()
