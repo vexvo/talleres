@@ -161,7 +161,18 @@ class DoubleLinkedList:
             self.remove_head()
         print(arr, self.len)
 
-    # 13. saca el cuadrado del indice anterior al dado
+    # 13. revisa se un valor esta repetido en la lista
+    def repeated_value(self, value):
+        current = self.selected_structure.head
+        flag = False
+        while current != None:
+            if current.data == value:
+                flag = True
+                return flag
+            current = current.next
+        return flag
+
+    # 14. saca el cuadrado del indice anterior al dado
     def cuadrado_anterior(self, index):
         if index == 0:
             self.selected_structure.head.data = 0
@@ -173,7 +184,7 @@ class DoubleLinkedList:
         prev = current_node.prev
         current_node.data = prev.data ** 2
 
-    # 14. Invierte la lista y le saca la raiz a cada una 
+    # 15. Invierte la lista y le saca la raiz a cada una 
     def sqr_reverse(self):
         if self.len <= 1:
             current_node = self.head

@@ -19,7 +19,7 @@ while program_active:
                     if choice_picked == 'a':
                         # agregar nodo
                         s_value = int(input("Value of node:\n"))
-                        if this.repeated_value(s_value):
+                        if single_linked_list.repeated_value(s_value):
                                 print(Fore.RED + 'This value is already in the list,')
                         else:
                             s_add_node = int(input("           1. Al inicio\n           2. Al final\n           3. En una posición específica\n"))
@@ -75,7 +75,7 @@ while program_active:
                     if d_choice_picked == 'a':
                         # agregar nodo
                         d_value = int(input("Value of node:\n"))
-                        if this.repeated_value(d_value):
+                        if double_linked_list.repeated_value(d_value):
                                 print(Fore.RED + 'This value is already in the list,')
                         else:
                             d_add_node = int(input("           1. Al inicio\n           2. Al final\n           3. En una posición específica\n"))
@@ -135,13 +135,3 @@ while program_active:
     except:
         print("expected a letter either a, b or c")
 
-
-def repeated_value(self, value):
-        current = self.selected_structure.head
-        flag = False
-        while current != None:
-            if current.data == value:
-                flag = True
-                return flag
-            current = current.next
-        return flag
