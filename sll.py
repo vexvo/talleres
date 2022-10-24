@@ -133,26 +133,29 @@ class SingleLinkedList:
             self.pop()
 
     ''' Método que revisa si el valor dado se repite en la lista'''
+    # video
     def repeated_value(self, value):
-            current = self.selected_structure.head
-            flag = False
-            while current != None:
-                if current.data == value:
-                    flag = True
-                    return flag
-                current = current.next
-            return flag
+        current = self.head
+        flag = False
+        while current != None:
+            if current.value == value:
+                flag = True
+                return flag
+            current = current.next
+        return flag
 
 
     ''' Método que invierte la lista y a la vez le saca raiz cuadrada al valor del nodo'''
+    # video
     def sqr_reverse(self):
-        if self.len <= 1:
+        if self.length <= 1:
             current_node = self.head
             if current_node != None:
-                current_node.data = round(current_node.data ** (1/2), 2)
+                current_node.value = round(current_node.value ** (1/2), 2)
             return
-        for i in range(self.len):
+        for i in range(self.length):
             current_node = self.head
-            current_node.data = round(current_node.data ** (1/2), 2)
-            self.insert_node(self.len-i, current_node.data)
-            self.remove_head()
+            current_node.value = round(current_node.value ** (1/2), 2)
+            self.append(current_node.value)
+            self.shift()
+        self.reverse()

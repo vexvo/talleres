@@ -1,4 +1,5 @@
 from array import array
+from locale import currency
 
 
 class DoubleLinkedList:
@@ -24,7 +25,7 @@ class DoubleLinkedList:
         while current_node is not None:
             array_dll.append(current_node.value)
             current_node = current_node.next
-        return array_dll
+        print(f'Lista actual: {array_dll}\nCantidad de nodos: {self.length}')
 
     # 4. Insertamos un nodo al inicio de la lista 
     def unshift_node(self, value):
@@ -46,8 +47,8 @@ class DoubleLinkedList:
         new_node = self.Node(value)
         # validar si la lista esta vacia
         if self.head == None and self.tail == None:
-            self.head = None
-            self.tail = None
+            self.head = new_node
+            self.tail = new_node
         else:
             self.tail.next = new_node
             new_node.previous = self.tail
@@ -64,7 +65,6 @@ class DoubleLinkedList:
             self.head = remove_node.next
             remove_node.next = None
             self.length -= 1
-            return print(remove_node.value)
 
     # 7. Remover nodo al final de la lista
     def pop_node(self):
@@ -77,47 +77,46 @@ class DoubleLinkedList:
             self.tail.next = None
             remove_node.previous = None
             self.length -= 1
-            return print(remove_node.value)
 
     # 8. Retorna un nodo necesario de la lista
     def get_node(self, index):
-        if index < 0 or index > self.len-1:
-            return
-        current_node, counter = self.head, 0
-        while counter < index:
-            current_node = current_node.next 
+        if index < 0 or index >= self.length:
+            return None
+        if index == self.length - 1:
+            return self.tail
+        
+        current_node = self.head
+        counter = 0
+        while index != counter:
+            current_node = current_node.next
             counter += 1
         return current_node
 
     # 9. Retorna el valor del nodo solicitado
     def get_node_value(self, index):
-        if index < 0 or index > self.len-1:
-            return
-        current_node, counter = self.head, 0
-        while counter < index:
-            current_node = current_node.next
-            counter += 1
-        return current_node.data
+        node = self.get_node(index)
+        if node != None: return node.value
+        else: print('Index fuera de rango')
 
     # 9. Cambia el valor del nodo solicitado 
-    def set_node_value(self, value, index):
-        if index > self.len-1 or index < 0:
-            return
-        if index == 0:
-            self.head.data = value
-        elif index == self.len-1:
-            self.tail.data = value
+    def set_node_value(self, index, value):
+        search_node = self.get_node(index)
+        if search_node != None:
+            search_node.value = value
         else:
-            to_rep = self.get_node(index)
-            to_rep.data = value
+            print('Index fuera de rango')
+
+    ### video functions
+
 
     # 10. Inserta un nodo con un valor dado en una posicion dada de la lista
+    # video
     def insert_node(self, index, value):
-        if index < 0 or index > self.len:
+        if index < 0 or index > self.length:
             return
         if index == 0:
             self.unshift_node(value)
-        elif index == self.len:
+        elif index == self.length:
             self.append_node(value)
         else:
             prev = self.get_node(index-1)
@@ -127,15 +126,16 @@ class DoubleLinkedList:
             new_node.prev = prev
             new_node.next = next
             next.prev = new_node
-            self.len += 1
+            self.length += 1
 
     # 11. Elimina el nodo en la posición indicada de la lista
+    # video
     def remove_node(self, index):
-        if index < 0 or index > self.len-1:
+        if index < 0 or index > self.length-1:
             return
         if index == 0:
-            self.remove_head()
-        elif index == self.len-1:
+            self.shift_node()
+        elif index == self.length-1:
             self.pop()
         else:
             temp = self.get_node(index)
@@ -144,55 +144,55 @@ class DoubleLinkedList:
             #Asignaciones de enlace
             prev.next = next
             next.prev = prev
-            self.len -= 1
+            self.length -= 1
 
     # 12. Invierte la lista
+    # video
     def reverse(self):
-        arr = []
-        if self.len <= 1:
-            current_node = self.head
-            if current_node != None:
-                arr.append(round(current_node.data ** (1/2), 2))
+        if self.length <= 1:
             return
-        for i in range(self.len):
-            current_node = self.head
-            arr.insert(0, round(current_node.data ** (1/2), 2))
-            self.insert_node(self.len-i, current_node.data)
-            self.remove_head()
-        print(arr, self.len)
+        for i in range(self.length):
+            current = self.head
+            self.insert_node(self.length-i, current.value)
+            self.shift_node()
 
     # 13. revisa se un valor esta repetido en la lista
+    # video
     def repeated_value(self, value):
-        current = self.selected_structure.head
+        current = self.head
         flag = False
         while current != None:
-            if current.data == value:
+            if current.value == value:
                 flag = True
                 return flag
             current = current.next
         return flag
 
     # 14. saca el cuadrado del indice anterior al dado
+    # video
     def cuadrado_anterior(self, index):
         if index == 0:
-            self.selected_structure.head.data = 0
+            self.head.value = 0
             return
-        current_node, c = self.selected_structure.head, 0
+        current_node, c = self.head, 0
         while c < index:
             current_node = current_node.next
             c += 1
-        prev = current_node.prev
-        current_node.data = prev.data ** 2
+        prev = self.get_node(index-1)
+        current_node.value = prev.value ** 2
+        return current_node.value
 
     # 15. Invierte la lista y le saca la raiz a cada una 
+    # video
     def sqr_reverse(self):
-        if self.len <= 1:
+        if self.length <= 1:
             current_node = self.head
             if current_node != None:
-                current_node.data = round(current_node.data ** (1/2), 2)
+                current_node.value = round(current_node.value ** (1/2), 2)
             return
-        for i in range(self.len):
+        for i in range(self.length):
             current_node = self.head
-            current_node.data = round(current_node.data ** (1/2), 2)
-            self.insert_node(self.len-i, current_node.data)
-            self.remove_head()
+            current_node.value = round(current_node.value ** (1/2), 2)
+            self.append_node(current_node.value)
+            self.shift_node()
+        self.reverse()

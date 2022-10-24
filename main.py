@@ -1,4 +1,3 @@
-import this
 from colorama import *
 init()
 from dll import DoubleLinkedList
@@ -45,7 +44,7 @@ while program_active:
                     elif choice_picked == 'c':
                         # consultar valor nodo
                         s_pos_v = int(input("Position of the node who's value you wish to get:\n"))
-                        single_linked_list.get_node_value(s_pos_v)
+                        print(single_linked_list.get_node_value(s_pos_v))
 
                     elif choice_picked == 'd':
                         # modificar valor nodo
@@ -65,13 +64,15 @@ while program_active:
                         # salir de programa
                         program_active = False
                         break
+                    print(Fore.YELLOW)
                     single_linked_list.print_values()
+                    print("\n")
                 except:
                     print("Expected a numerical value")
         if list_picked == 'b':
             while True:
                 try:
-                    d_choice_picked = input(Fore.GREEN + "What do you wish to do with the following SIMPLE LIST:\n        " + Fore.RED + "a. " + Fore.WHITE + "Añadir nodo\n        " + Fore.RED + "b. " + Fore.WHITE + "Eliminar nodo\n        " + Fore.RED + "c. " + Fore.WHITE + "Consultar valor contenido en el nodo\n        " + Fore.RED + "d. " + Fore.WHITE + "Modificar valor de nodo\n        " + Fore.RED + "e. " + Fore.WHITE + "Invertir toda la lista\n        " + Fore.RED + "f. " + Fore.WHITE + "[Validación Especial 1] Modificar valor al cuadrado del anterior\n        " + Fore.RED + "g. " + Fore.WHITE + "[Validación Especial 2] Modificar valor al invertir y raiz cuadrada de cada nodo\n        " + Fore.RED + "h. " + Fore.WHITE + "Salir (cancela la ejecución del programa)\n")
+                    d_choice_picked = input(Fore.GREEN + "What do you wish to do with the following DOUBLE LIST:\n        " + Fore.RED + "a. " + Fore.WHITE + "Añadir nodo\n        " + Fore.RED + "b. " + Fore.WHITE + "Eliminar nodo\n        " + Fore.RED + "c. " + Fore.WHITE + "Consultar valor contenido en el nodo\n        " + Fore.RED + "d. " + Fore.WHITE + "Modificar valor de nodo\n        " + Fore.RED + "e. " + Fore.WHITE + "Invertir toda la lista\n        " + Fore.RED + "f. " + Fore.WHITE + "[Validación Especial 1] Modificar valor al cuadrado del anterior\n        " + Fore.RED + "g. " + Fore.WHITE + "[Validación Especial 2] Modificar valor al invertir y raiz cuadrada de cada nodo\n        " + Fore.RED + "h. " + Fore.WHITE + "Salir (cancela la ejecución del programa)\n")
                     if d_choice_picked == 'a':
                         # agregar nodo
                         d_value = int(input("Value of node:\n"))
@@ -100,11 +101,14 @@ while program_active:
 
                     elif d_choice_picked == 'c':
                         # consultar valor nodo
-                        double_linked_list.get_node_value()
+                        d_pos_v = int(input("Position of the node who's value you wish to get:\n"))
+                        print(double_linked_list.get_node_value(d_pos_v))
 
                     elif d_choice_picked == 'd':
                         # modificar valor nodo
-                        double_linked_list.set_node_value()
+                        d_pos_s = int(input("Position of the node who's value you wish to set:\n"))
+                        d_pos_sv = int(input("Value you wish to set to this node:\n"))
+                        double_linked_list.set_node_value(d_pos_s, d_pos_sv)
 
                     elif d_choice_picked == 'e':
                         # invertir toda la lista
@@ -125,7 +129,9 @@ while program_active:
                         # salir de programa
                         program_active = False
                         break
+                    print(Fore.YELLOW)
                     double_linked_list.print_list()
+                    print("\n")
                 except:
                     print("Expected a numerical value")
         if list_picked == 'c':
