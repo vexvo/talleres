@@ -79,6 +79,7 @@ class SingleLinkedList:
                 previous_node = self.get_node(index -1)
                 previous_node.next = remove_node.next
                 remove_node.next = None
+                self.length -= 1
         else:
             print('Index fuera de rango')
 
@@ -128,7 +129,7 @@ class SingleLinkedList:
 
     ''' Método que hace que se invierta la lista'''
     def reverse(self):
-        for i in range(0, self.length - 1):
+        for i in range(self.length):
             self.insert(i, self.tail.value)
             self.pop()
 

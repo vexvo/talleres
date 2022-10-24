@@ -28,7 +28,7 @@ while program_active:
                                 single_linked_list.append(s_value)
                             elif s_add_node == 3:
                                 s_value_pos = int(input("Position of the node:\n"))
-                                single_linked_list.insert(s_value, s_value_pos)
+                                single_linked_list.insert(s_value_pos, s_value)
 
                     elif choice_picked == 'b':
                         # eliminar nodo

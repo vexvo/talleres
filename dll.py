@@ -136,7 +136,7 @@ class DoubleLinkedList:
         if index == 0:
             self.shift_node()
         elif index == self.length-1:
-            self.pop()
+            self.pop_node()
         else:
             temp = self.get_node(index)
             next = temp.next
